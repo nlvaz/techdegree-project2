@@ -59,16 +59,19 @@ const showPage = (list, page) => {
 ***/
 
 const appendPageLinks = list => {
-	const pages = Math.ceil(list.length/10);
+	const pageNums = Math.ceil(list.length/10);
 	const studentsDiv = document.querySelector('.page');
 	const pageLinkDiv = document.createElement('div');
+	const pageUL = document.createElement('ul');
 
 	pageLinkDiv.classList.add("pagination");
-
 	studentsDiv.appendChild(pageLinkDiv);
 
-	for (let p = 0; p < pages; p++) {
-		pageLinkDiv.appendChild(document.createElement('ul'));
+
+	for (let p = 0; p < pageNums; p++) {
+		pageLinkDiv.appendChild(pageUL);
+		pageUL.appendChild(document.createElement('li').appendChild('a'));
+		pageUL.children.children.display = p+1;
 	}
 }
 
