@@ -19,13 +19,6 @@ FSJS project 2 - List Filter and Pagination
 
 const ul = document.querySelector('.student-list');
 const lis = ul.children;
-const students = [];
-
-for(let i = 0; i < lis.length; i++) {
-	students[i] = lis[i];
-}
-
-console.log(students);
 
 
 /***
@@ -43,8 +36,19 @@ console.log(students);
        "invoke" the function
 ***/
 
-const showPage = (list, page) => {
+/*
+1: 0-9
+2: 10-19
+3: 20;29
+4: 30-39
+5: 40-49
+6: 50-54
+*/
 
+const showPage = (list, page) => {
+	for (let i = 0; i < list.length; i++)
+		if(i >= (page-1)*10 && i < page*10)
+			console.log();
 }
 
 
@@ -54,14 +58,21 @@ const showPage = (list, page) => {
    functionality to the pagination buttons.
 ***/
 
-const appendPageLinks = (list) => {
-	const pages = Math.ceil(list/10);
+const appendPageLinks = list => {
+	const pages = Math.ceil(list.length/10);
+	const studentsDiv = document.querySelector('.page');
+	const pageLinkDiv = document.createElement('div');
+
+	pageLinkDiv.classList.add("pagination");
+
+	studentsDiv.appendChild(pageLinkDiv);
+
+	for (let p = 0; p < pages; p++) {
+		pageLinkDiv.appendChild(document.createElement('ul'));
+	}
 }
 
-appendPageLinks(students);
-
-
-
+appendPageLinks(lis);
 
 
 // Remember to delete the comments that came with this file, and replace them with your own code comments.
