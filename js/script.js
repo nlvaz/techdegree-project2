@@ -36,19 +36,12 @@ const lis = ul.children;
        "invoke" the function
 ***/
 
-/*
-1: 0-9
-2: 10-19
-3: 20;29
-4: 30-39
-5: 40-49
-6: 50-54
-*/
-
-const showPage = (list, page) => {
-	for (let i = 0; i < list.length; i++)
-		if(i >= (page-1)*10 && i < page*10)
-			console.log();
+const showPage = (lis, pageNum) => {
+	for (let i = 0; i < lis.length; i++)
+		if(i >= (pageNum-1)*10 && i < pageNum*10)
+			lis[i].style.display = "block";
+		else if(i < (pageNum-1)*10 || i >= pageNum*10)
+			lis[i].style.display = "none";
 }
 
 
@@ -58,20 +51,29 @@ const showPage = (list, page) => {
    functionality to the pagination buttons.
 ***/
 
-const appendPageLinks = list => {
-	const pageNums = Math.ceil(list.length/10);
-	const studentsDiv = document.querySelector('.page');
+const appendPageLinks = lis => {
+	const pageNums = Math.ceil(lis.length/10);
+	const studentDiv = document.querySelector('.page');
 	const pageLinkDiv = document.createElement('div');
-	const pageUL = document.createElement('ul');
 
 	pageLinkDiv.classList.add("pagination");
-	studentsDiv.appendChild(pageLinkDiv);
+	studentDiv.appendChild(pageLinkDiv);
 
 
-	for (let p = 0; p < pageNums; p++) {
+	for (let p = 1; p <= pageNums; p++) {
+		const pageUL = document.createElement('ul');
+		const pageLI = document.createElement('li');
+		const pageAnchor = document.createElement('a');
+
+		pageAnchor.textContent = (p.toString());
+
 		pageLinkDiv.appendChild(pageUL);
-		pageUL.appendChild(document.createElement('li').appendChild('a'));
-		pageUL.children.children.display = p+1;
+		pageUL.appendChild(pageLI);
+		pageLI.appendChild(pageAnchor);
+
+		pageAnchor.addEventListener('click', (e) => {
+			showPage(lis, parseInt(e.target.textContent));
+		})
 	}
 }
 
