@@ -55,3 +55,6 @@ const appendPageLinks = lis => {
 }
 
 appendPageLinks(lis);
+
+//initial call to showPage function so that when page loads, only first 10 students show
+showPage(lis, 1);
