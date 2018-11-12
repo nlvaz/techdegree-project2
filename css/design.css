@@ -95,11 +95,19 @@ body{
     border-bottom: none;
   }
 
-.pagination ul{
-  margin: 50px 0 0 0;
-  text-align: center;
-  display: inline-block;
+
+.pagination {
+  width: 200px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
+
+  .pagination ul{
+    margin: 50px 0 0 0;
+    text-align: center;
+    display: inline-block;
+  }
  
   .pagination li{
     display: inline-block;
