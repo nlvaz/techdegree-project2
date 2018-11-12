@@ -7,7 +7,23 @@ FSJS project 2 - List Filter and Pagination
 //and the actual collection of students
 const ul = document.querySelector('.student-list');
 const lis = ul.children;
+//global variable to select header div
+const header = document.querySelector('.page-header');
 
+//dynamically add search bar component
+const studentSearchDiv = document.createElement('div');
+const searchInput = document.createElement('input');
+const searchButton = document.createElement('button');
+
+studentSearchDiv.classList.add("student-search");
+
+searchButton.textContent = "Search";
+searchInput.placeholder = "Search for students...";
+
+//appending search component to the page
+header.appendChild(studentSearchDiv);
+studentSearchDiv.appendChild(searchInput);
+studentSearchDiv.appendChild(searchButton);
 
 
 //showPage function that displays appropriate students
