@@ -17,6 +17,7 @@ const searchButton = document.createElement('button');
 
 studentSearchDiv.classList.add("student-search");
 
+//adding text/placeholder to both search button and input
 searchButton.textContent = "Search";
 searchInput.placeholder = "Search for students...";
 
@@ -70,7 +71,21 @@ const appendPageLinks = lis => {
 	}
 }
 
-appendPageLinks(lis);
+//search component search function
+const studentSearch = ref => {
+	let results = [];
+}
 
+//search component eventListeners
+searchInput.addEventListener('keyup', () => {
+
+});
+searchButton.addEventListener('click', () => {
+
+});
+
+
+//initital appendPageLinks call with original student list
+appendPageLinks(lis);
 //initial call to showPage function so that when page loads, only first 10 students show
 showPage(lis, 1);
