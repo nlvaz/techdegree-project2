@@ -74,14 +74,30 @@ const appendPageLinks = lis => {
 //search component search function
 const studentSearch = ref => {
 	let results = [];
+
+	for(let i = 0; i < lis.length; i++){
+		if(lis[i].innerHTML.includes(ref))
+			results.push(lis[i]);
+	}
+
+	return results;
 }
 
 //search component eventListeners
 searchInput.addEventListener('keyup', () => {
+	let results = studentSearch(searchInput.value);
 
+	if(results.length != 0) {
+		for(let compare = 0; compare < results.length; compare++) {
+			for(let i = 0; i < lis.length; i++) {
+		    	if(lis[i] != results[compare])
+		    		lis[i].style.display = "none";
+		    }
+		}
+	}
 });
 searchButton.addEventListener('click', () => {
-
+	let results = studentSearch(searchInput.value);
 });
 
 
