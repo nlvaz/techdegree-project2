@@ -9,6 +9,8 @@ const ul = document.querySelector('.student-list');
 const lis = ul.children;
 //global variable to select header div
 const header = document.querySelector('.page-header');
+//global variable to select ul parent div
+const studentDiv = document.querySelector('.page');
 
 //dynamically add search bar component
 const studentSearchDiv = document.createElement('div');
@@ -40,7 +42,6 @@ const showPage = (lis, pageNum) => {
 //appendPageLinks function that creates buttons and calls showPage function
 const appendPageLinks = lis => {
 	const pageNums = Math.ceil(lis.length/10);
-	const studentDiv = document.querySelector('.page');
 	const pageLinkDiv = document.createElement('div');
 
 	pageLinkDiv.classList.add("pagination");
@@ -86,8 +87,15 @@ const studentSearch = ref => {
 //search component eventListeners
 searchInput.addEventListener('keyup', () => {
 	let results = studentSearch(searchInput.value);
+	const h1 = document.createElement('h1');
+	const paginationDiv = document.querySelector('.pagination');
+	studentDiv.removeChild(paginationDiv);
 
-	if(results.length != 0) {
+	if(results.length == 0){
+		ul.style.display = "none";
+		h1.textContent = "No matches found"
+		studentDiv.appendChild(h1);
+	} else if(results.length != 0) {
 		for(let compare = 0; compare < results.length; compare++) {
 			for(let i = 0; i < lis.length; i++) {
 		    	if(lis[i] != results[compare])
