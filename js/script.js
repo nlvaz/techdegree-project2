@@ -77,10 +77,12 @@ const studentSearch = ref => {
 	let results = [];
 
 	for(let i = 0; i < lis.length; i++){
-		if(lis[i].innerHTML.includes(ref))
-			results.push(lis[i]);
+		const names = lis[i].querySelector('.student-details h3');
+		const email = lis[i].querySelector('.student-details span');
+		if(names.textContent.includes(ref) || email.textContent.includes(email))
+			results.push(lis[i].innerHTML);
 	}
-
+	console.log(results);
 	return results;
 }
 
@@ -88,20 +90,26 @@ const studentSearch = ref => {
 searchInput.addEventListener('keyup', () => {
 	let results = studentSearch(searchInput.value);
 	const h1 = document.createElement('h1');
-	const paginationDiv = document.querySelector('.pagination');
-	studentDiv.removeChild(paginationDiv);
+	const paginationDiv = document.querySelector(".pagination");
+
+	if(paginationDiv != null)
+		studentDiv.removeChild(paginationDiv);
 
 	if(results.length == 0){
 		ul.style.display = "none";
 		h1.textContent = "No matches found"
 		studentDiv.appendChild(h1);
 	} else if(results.length != 0) {
-		for(let compare = 0; compare < results.length; compare++) {
-			for(let i = 0; i < lis.length; i++) {
-		    	if(lis[i] != results[compare])
-		    		lis[i].style.display = "none";
-		    }
+		const newList = document.createElement('ul');
+		ul.style.display = "none";
+
+		for(let i = 0; i < results.length; i++) {
+			let li = document.createElement('li');
+			li = results[i];
+			newList.appendChild(li);
 		}
+		studentDiv.appendChild(newList);
+		appendPageLinks(newList);
 	}
 });
 searchButton.addEventListener('click', () => {
