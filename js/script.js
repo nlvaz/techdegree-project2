@@ -82,7 +82,6 @@ const studentSearch = ref => {
 		if(names.textContent.includes(ref) || email.textContent.includes(ref))
 			results.push(studentLis[i]);
 	}
-	console.log(results);
 	return results;
 }
 
@@ -91,6 +90,7 @@ searchInput.addEventListener('keyup', () => {
 	let results = studentSearch(searchInput.value);
 	const h1 = document.createElement('h1');
 	const paginationDiv = document.querySelector(".pagination");
+	const newList = document.createElement('ul');
 
 	if(paginationDiv != null)
 		studentDiv.removeChild(paginationDiv);
@@ -100,8 +100,8 @@ searchInput.addEventListener('keyup', () => {
 		h1.textContent = "No matches found"
 		studentDiv.appendChild(h1);
 	} else if(results.length != 0) {
-		const newList = document.createElement('ul');
 		ul.style.display = "none";
+		newList.classList.add("student-list");
 
 		for(let i = 0; i < results.length; i++) {
 			let li = document.createElement('li');
