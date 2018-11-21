@@ -6,7 +6,7 @@ FSJS project 2 - List Filter and Pagination
 //global variables that selects the ul that holds the students
 //and the actual collection of students
 const ul = document.querySelector('.student-list');
-const lis = ul.children;
+const studentLis = ul.children;
 //global variable to select header div
 const header = document.querySelector('.page-header');
 //global variable to select ul parent div
@@ -76,11 +76,11 @@ const appendPageLinks = lis => {
 const studentSearch = ref => {
 	let results = [];
 
-	for(let i = 0; i < lis.length; i++){
-		const names = lis[i].querySelector('.student-details h3');
-		const email = lis[i].querySelector('.student-details span');
-		if(names.textContent.includes(ref) || email.textContent.includes(email))
-			results.push(lis[i].innerHTML);
+	for(let i = 0; i < studentLis.length; i++){
+		const names = studentLis[i].querySelector('.student-details h3');
+		const email = studentLis[i].querySelector('.student-details span');
+		if(names.textContent.includes(ref) || email.textContent.includes(ref))
+			results.push(studentLis[i]);
 	}
 	console.log(results);
 	return results;
@@ -118,6 +118,6 @@ searchButton.addEventListener('click', () => {
 
 
 //initital appendPageLinks call with original student list
-appendPageLinks(lis);
+appendPageLinks(studentLis);
 //initial call to showPage function so that when page loads, only first 10 students show
-showPage(lis, 1);
+showPage(studentLis, 1);
