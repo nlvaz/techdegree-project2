@@ -89,9 +89,9 @@ const studentSearch = ref => {
 //search component eventListeners
 searchInput.addEventListener('keyup', () => {
 	let results = studentSearch(searchInput.value);
+	let newList = document.createElement('ul');
 	const h1 = document.createElement('h1');
 	const paginationDiv = document.querySelector(".pagination");
-	let newList = document.createElement('ul');
 
 	if(paginationDiv != null)
 		studentDiv.removeChild(paginationDiv);
@@ -104,9 +104,11 @@ searchInput.addEventListener('keyup', () => {
 		ul.style.display = "none";
 		newList.classList.add("student-list");
 
-		for(let i = 0; i < results.length; i++)
-			newList.appendChild(results[i]);
-
+		for(let i = 0; i < results.length; i++) {
+			let li = document.createElement('li');
+			li = results[i];
+			newList.appendChild(li);
+		}
 		studentDiv.appendChild(newList);
 		appendPageLinks(newList);
 	}
