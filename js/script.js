@@ -82,6 +82,7 @@ const studentSearch = ref => {
 		if(names.textContent.includes(ref) || email.textContent.includes(ref))
 			results.push(studentLis[i]);
 	}
+
 	return results;
 }
 
@@ -90,7 +91,7 @@ searchInput.addEventListener('keyup', () => {
 	let results = studentSearch(searchInput.value);
 	const h1 = document.createElement('h1');
 	const paginationDiv = document.querySelector(".pagination");
-	const newList = document.createElement('ul');
+	let newList = document.createElement('ul');
 
 	if(paginationDiv != null)
 		studentDiv.removeChild(paginationDiv);
