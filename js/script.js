@@ -105,9 +105,7 @@ searchInput.addEventListener('keyup', () => {
 		newList.classList.add("student-list");
 
 		for(let i = 0; i < results.length; i++) {
-			let li = document.createElement('li');
-			li = results[i];
-			newList.appendChild(li);
+			newList.appendChild(results[i]);
 		}
 		studentDiv.appendChild(newList);
 		appendPageLinks(newList);
