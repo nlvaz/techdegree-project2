@@ -86,35 +86,69 @@ const studentSearch = ref => {
 	return results;
 }
 
+const hideStudents = students => {
+	for(li = 0; li < students.length; li++)
+		students[li].style.display = "none";
+}
+
 //search component eventListeners
 searchInput.addEventListener('keyup', () => {
 	let results = studentSearch(searchInput.value);
-	let newList = document.createElement('ul');
-	const h1 = document.createElement('h1');
+	let h1 = document.querySelector('.page h1');
 	const paginationDiv = document.querySelector(".pagination");
 
 	if(paginationDiv != null)
 		studentDiv.removeChild(paginationDiv);
 
 	if(results.length == 0){
-		ul.style.display = "none";
+		hideStudents(studentLis);
+		if(h1 == null)
+			h1 = document.createElement("h1");
 		h1.textContent = "No matches found"
 		studentDiv.appendChild(h1);
 	} else if(results.length != 0) {
-		ul.style.display = "none";
-		newList.classList.add("student-list");
+		if(h1 != null)
+			h1.style.display = "none";
+		hideStudents(studentLis);
 
-		for(let i = 0; i < results.length; i++) {
-			let li = document.createElement('li');
-			li = results[i];
-			newList.appendChild(li);
+		for(let s = 0; s < studentLis.length; s++){
+			for(let r = 0; r < results.length; r++) {
+				if(studentLis[s] === results[r])
+					studentLis[s].style.display = "block";
+			}
 		}
-		studentDiv.appendChild(newList);
-		appendPageLinks(newList);
+		appendPageLinks(results);
+		showPage(results, 1);
 	}
 });
 searchButton.addEventListener('click', () => {
 	let results = studentSearch(searchInput.value);
+	let h1 = document.querySelector('.page h1');
+	const paginationDiv = document.querySelector(".pagination");
+
+	if(paginationDiv != null)
+		studentDiv.removeChild(paginationDiv);
+
+	if(results.length == 0){
+		hideStudents(studentLis);
+		if(h1 == null)
+			h1 = document.createElement("h1");
+		h1.textContent = "No matches found"
+		studentDiv.appendChild(h1);
+	} else if(results.length != 0) {
+		if(h1 != null)
+			h1.style.display = "none";
+		hideStudents(studentLis);
+
+		for(let s = 0; s < studentLis.length; s++){
+			for(let r = 0; r < results.length; r++) {
+				if(studentLis[s] === results[r])
+					studentLis[s].style.display = "block";
+			}
+		}
+		appendPageLinks(results);
+		showPage(results, 1);
+	}
 });
 
 
