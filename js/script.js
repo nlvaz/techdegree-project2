@@ -102,9 +102,12 @@ searchInput.addEventListener('keyup', () => {
 
 	if(results.length == 0){
 		hideStudents(studentLis);
-		if(h1 == null)
+		if(h1 == null) {
 			h1 = document.createElement("h1");
-		h1.textContent = "No matches found"
+			h1.classList.add("no-matches");
+		}
+		h1.textContent = "NO MATCHES FOUND"
+		h1.style.display = "block";
 		studentDiv.appendChild(h1);
 	} else if(results.length != 0) {
 		if(h1 != null)
