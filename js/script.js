@@ -86,12 +86,13 @@ const studentSearch = ref => {
 	return results;
 }
 
+//function to hide students with for loop
 const hideStudents = students => {
 	for(li = 0; li < students.length; li++)
 		students[li].style.display = "none";
 }
 
-//search component eventListeners
+//search component eventListeners (keyup, click (on button))
 searchInput.addEventListener('keyup', () => {
 	let results = studentSearch(searchInput.value);
 	let h1 = document.querySelector('.page h1');
@@ -134,9 +135,12 @@ searchButton.addEventListener('click', () => {
 
 	if(results.length == 0){
 		hideStudents(studentLis);
-		if(h1 == null)
+		if(h1 == null) {
 			h1 = document.createElement("h1");
-		h1.textContent = "No matches found"
+			h1.classList.add("no-matches");
+		}
+		h1.textContent = "NO MATCHES FOUND"
+		h1.style.display = "block";
 		studentDiv.appendChild(h1);
 	} else if(results.length != 0) {
 		if(h1 != null)
